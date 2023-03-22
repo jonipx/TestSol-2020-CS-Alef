@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="gotJsondata.js"></script>
+
+    <style type="text/css">
+
+        #nickPH {
+            float: left;
+            width: 300px;
+        }
+
+        #namePH {
+            float: left;
+            width: 300px;
+        }
+    </style>
+
+    <script>
+
+        // this function returns a shuffeld array
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length - 1; i > 0; i--) {
+                j = Math.floor(Math.random() * (i + 1));
+                x = a[i];
+                a[i] = a[j];
+                a[j] = x;
+            }
+            return a;
+        }
+
+
+        let names = new Array();
+        let nicks = [];
+        function init() {
+
+           
+
+
+            let Tnicks = document.getElementById("nickPH");
+            let Tnames = document.getElementById("namePH");
+            for (character of characters) {
+                if (character.nickname != undefined) {
+                    nicks[character.nickname] = character.characterName;
+                    names.push(character.characterName);
+                }
+            }
+            names = shuffle(names);
+            let i = 0;
+            for (nick in nicks) { // remember to pu "in" in the loop[ wit asossiative array]
+                //console.log(nick);
+                let ppnick = document.createElement("p");
+                ppnick.setAttribute('id', i);
+                ppnick.innerHTML = nick;
+                Tnicks.appendChild(ppnick);
+                let ppname = document.createElement("p");
+                
+                ppname.innerHTML = names[i];
+                Tnames.appendChild(ppname);
+                i++;
+            }
+
+            
+        }
+
+        function mark() {
+            let size = names.length;            
+            let x = Math.floor(Math.random() * size);
+            let mark_y = document.getElementById(x);
+            mark_y.style.backgroundColor = "yellow";
+           
+        }
+    </script>
+
+</head>
+<body onload="init()">
+    <div>
+        <button onclick="mark()">Play</button>
+    </div>
+    <div id="nickPH">
+        <h3>NickName</h3>
+    </div>
+    <div id="namePH">
+        <h3>Name</h3>
+    </div>
+</body>
+</html>
