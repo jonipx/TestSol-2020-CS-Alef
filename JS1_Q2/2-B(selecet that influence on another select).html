@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <style type="text/css">
+
+        #ph {
+            margin-top:100px;
+            font-size:25px;
+        }
+
+        select, option, button {
+            font-size:20px;
+        }
+
+    </style>
+
+
+    <script src="stocks.js"></script>
+    <script>       
+        let amount = [];
+
+        function init() {       
+            let stocksDDL = document.getElementById("stocksDDL");
+            stocksDDL.setAttribute('onchange', 'amt()');
+            let stockim = new Array();        
+            
+            for (stock in stocks)
+            { 
+                let opt1 = document.createElement("option");
+                stockim.push(stock);
+                opt1.value = stock;                
+                opt1.innerHTML = stock;
+                stocksDDL.appendChild(opt1);
+                              
+                amount[stock] = stocks[stock].current;// same as  amount[stock] = stocks[stock]["current"];
+               
+            }                                                                             
+           
+            let bb = document.getElementById("b");
+            let budget = document.createElement("p");
+            let num = 1000;
+            budget.innerHTML = "budget left is: " + num;
+            bb.appendChild(budget);   
+
+            console.log(amount);
+        }
+
+        function amt() {
+            
+            let x_stocks = document.getElementById("stocksDDL").value;
+            let amountDDL = document.getElementById("amountDDL");
+            let num_stock = amount[x_stocks];
+
+            for (let i = 0; i <= num_stock; i++) {
+                let opt2 = document.createElement("option");
+                opt2.innerHTML = i;
+                amountDDL.appendChild(opt2);
+            }
+            
+            
+        }
+        
+
+    </script>
+
+
+</head>
+<body onload="init()">
+
+    <select id="stocksDDL">
+        <option selected> select stock</option>
+    </select>
+     
+    <select id="amountDDL">
+        <option selected> select amount</option>
+    </select>
+
+    <button>Buy</button>
+    <span id="b"></span>
+    <div id="ph">
+
+
+
+    </div>
+    <br /><br />
+
+    <a href="basket - Skeleton.html">TO THE BASKET</a>
+
+</body>
+</html>
